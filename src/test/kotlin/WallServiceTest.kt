@@ -1,3 +1,5 @@
+package ru.wall
+
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -6,8 +8,9 @@ class WallServiceTest {
 
     @Test
     fun add() {
+        val service = WallService
         val post = Post(
-            id = 1,
+            id = 10,
             ownerId = 15,
             fromId = 25,
             createdBy = 1,
@@ -21,12 +24,14 @@ class WallServiceTest {
             postType = "",
             signerId = 0,
         )
-        val result = WallService.add(post)
+        val result = service.add(post)
         assertEquals(result, post)
     }
 
+
     @Test
     fun update() {
+        val service = WallService
         val post = Post(
             id = 1,
             ownerId = 15,
@@ -42,13 +47,14 @@ class WallServiceTest {
             postType = "",
             signerId = 0,
         )
-        val result = WallService.update(post)
-        assertEquals(result, false)
+        service.add(Post(id=1,ownerId = 10,createdBy = 0, date = 0, fromId = 10))
+        val result = service.update(post)
+        assertTrue(result)
     }
 
     @Test
     fun getPost() {
-        val result = WallService.getPost(id = 1)
+        val result = WallService.getPost(id = 20)
         assertEquals(result, "Пост с таким ID не найден.")
     }
 }
