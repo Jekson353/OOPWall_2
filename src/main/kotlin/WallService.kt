@@ -3,6 +3,10 @@ package ru.wall
 object WallService {
     private var posts = emptyArray<Post>()
 
+    fun getNumberPost(): Int{
+        return posts.lastIndex+1
+    }
+
     fun add(post: Post): Post {
         if (posts.isNotEmpty()) {
             for (i: Int in 0..posts.size) {
@@ -26,23 +30,9 @@ object WallService {
             for (i: Int in 0..posts.size) {
                 val searchPost = posts[i]
                 if (post.id == searchPost.id) {
-                    val updatedPost = searchPost.copy(
-                            ownerId = post.ownerId,
-                            fromId = post.fromId,
-                            createdBy = post.createdBy,
-                            text = post.text,
-                            replyPostId = post.replyPostId,
-                            friendsOnly = post.friendsOnly,
-                            comments = post.comments,
-                            copyright = post.copyright,
-                            likes = post.likes,
-                            views = post.views,
-                            postType = post.postType,
-                            signerId = post.signerId,
-                            canPin = post.canPin,
-                            canDelete = post.canDelete,
-                            isPinned = post.isPinned,
-                            markedAsAds = post.markedAsAds
+                    val updatedPost = post.copy(
+                            id = searchPost.id,
+                            date = searchPost.date,
                     )
                     posts[i] = updatedPost
                     return true
@@ -53,7 +43,7 @@ object WallService {
         return false
     }
 
-    fun getPost(id: Long): String {
+    fun getPost(id: Int): String {
         for ((index, post) in posts.withIndex()) {
             if (post.id == id) {
                 return posts[index].toString()

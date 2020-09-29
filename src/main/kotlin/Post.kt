@@ -1,7 +1,7 @@
 package ru.wall
 
 data class Post(
-        val id: Long,
+        val id: Int = WallService.getNumberPost(),
         val ownerId: Int,
         val fromId: Int,
         val createdBy: Int,
