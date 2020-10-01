@@ -6,6 +6,7 @@ fun main() {
     val calendar = Calendar.getInstance()
     val timestamp = calendar.timeInMillis
     val post = Post(
+            id=null,
             ownerId = 15,
             fromId = 25,
             createdBy = 1,
@@ -19,10 +20,13 @@ fun main() {
             postType = "",
             signerId = 0,
     )
-    println("Первый пост: $post")
+    println("Оригинал первого поста: $post")
     WallService.add(post)
+    val post1 = WallService.getPost(id = 0)
+    println("Внесен в базу как: $post1")
 
     val twoPost = Post(
+            id=null,
             ownerId = 15,
             fromId = 25,
             createdBy = 1,
@@ -38,11 +42,13 @@ fun main() {
     )
     println("Второй пост: $twoPost")
     WallService.add(twoPost)
+    val post2 = WallService.getPost(id = 1)
+    println("Внесен в базу как: $post2")
 
 
     val result1 = WallService.getPost(id = 1)
     println("Пост до изменения: $result1")
-    val updatedPost = twoPost.copy(text = "Новый текст поста", likes = 10)
+    val updatedPost = result1.copy(text = "Новый текст поста", likes = 10)
     WallService.update(updatedPost)
 
     val result2 = WallService.getPost(id = 1)

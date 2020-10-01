@@ -1,9 +1,11 @@
 package ru.wall
 
+import java.lang.RuntimeException
+
 object WallService {
     private var posts = emptyArray<Post>()
 
-    fun getNumberPost(): Int{
+    private fun getNumberPost(): Int{
         return posts.lastIndex+1
     }
 
@@ -14,13 +16,13 @@ object WallService {
                 if (post.id == searchPost.id) {
                     break
                 } else {
-                    posts += post
+                    posts += post.copy(id=getNumberPost())
                     return posts.last()
                 }
             }
             return posts.last()
         } else {
-            posts += post
+            posts += post.copy(id=getNumberPost())
             return posts.last()
         }
     }
@@ -43,12 +45,12 @@ object WallService {
         return false
     }
 
-    fun getPost(id: Int): String {
+    fun getPost(id: Int): Post {
         for ((index, post) in posts.withIndex()) {
             if (post.id == id) {
-                return posts[index].toString()
+                return posts[index]
             }
         }
-        return "Пост с таким ID не найден."
+        throw RuntimeException("Пост не найден!")
     }
 }
