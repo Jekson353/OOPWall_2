@@ -6,7 +6,6 @@ fun main() {
     val calendar = Calendar.getInstance()
     val timestamp = calendar.timeInMillis
     val post = Post(
-            id=null,
             ownerId = 15,
             fromId = 25,
             createdBy = 1,
@@ -15,8 +14,6 @@ fun main() {
             replyPostId = 10,
             comments = "",
             copyright = "",
-            likes = 0,
-            views = 0,
             postType = "",
             signerId = 0,
     )
@@ -26,7 +23,6 @@ fun main() {
     println("Внесен в базу как: $post1")
 
     val twoPost = Post(
-            id=null,
             ownerId = 15,
             fromId = 25,
             createdBy = 1,
@@ -35,8 +31,6 @@ fun main() {
             replyPostId = 10,
             comments = "",
             copyright = "",
-            likes = 0,
-            views = 0,
             postType = "",
             signerId = 0,
     )
